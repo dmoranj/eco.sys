@@ -1,0 +1,31 @@
+#loginData {
+    position: absolute;
+    width: 30%;
+    height: 20%;
+    left: 35%;
+    top: 40%;
+    background-color: #AAFF66;
+    padding: 10px;
+}
+
+#registerData {
+    position: absolute;
+    width: 40%;
+    height: 30%;
+    left: 30%;
+    top: 40%;
+    background-color: #AAFF66;
+    padding: 10px;
+}
+
+.formField {
+    padding: 15px;
+}
+
+.formField > input {
+    float: right;
+}
+
+.buttons {
+    float: right;
+}

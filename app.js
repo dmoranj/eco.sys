@@ -5,8 +5,13 @@
 
 var express = require('express')
   , gameMod = require('./routes/game')
+  , login = require('./routes/login')
+  , users = require('./routes/users')
   , http = require('http')
   , path = require('path');
+
+var MemoryStore = express.session.MemoryStore,
+    sessionStore = new MemoryStore();
 
 var app = express();
 
@@ -17,9 +22,8 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: "keyboard cat"}));
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -28,8 +32,30 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/game/', gameMod.game);
+// Middleware
+//--------------------------------------------------------------------------------
+function requiresLogin(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
 
+// List of routes
+//--------------------------------------------------------------------------------
+
+// User management
+app.get('/login', login.login);
+app.post('/login', login.authenticate);
+app.get('/users/register', users.registerForm);
+app.post('/users/register', users.register);
+
+// Gameplay
+app.get('/game', requiresLogin, gameMod.game);
+
+// Start the server
+//--------------------------------------------------------------------------------
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
