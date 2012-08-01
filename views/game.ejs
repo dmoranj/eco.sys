@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+<link rel="stylesheet" type="text/css" href="/stylesheets/board.css" />
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/jquery.form.js"></script>
+<script src="/javascripts/tile.js"></script>
+<script src="/javascripts/board.js"></script>
+<script src="/javascripts/hand.js"></script>
+<script src="/javascripts/main.js"></script>
+</head>
+
+<body>
+<div id="main">
+	<div id="title"></div>
+	<div id="opponents">
+		<input type="button" value="+10x" onclick="GameBoard.moveViewport(10, 0)" />
+		<input type="button" value="-10x" onclick="GameBoard.moveViewport(-10, 0)" />
+		<input type="button" value="+10y" onclick="GameBoard.moveViewport(0, 10)" />
+		<input type="button" value="-10y" onclick="GameBoard.moveViewport(0, -10)" />
+	</div>
+	<div id="board">
+		<canvas 
+			id="canvasBoard"
+			height="800" 
+			width="600"
+			ondrop="GameBoard.drop(event)"
+			ondragover="GameBoard.over(event)">
+		</canvas>
+	</div>
+	<div id="tiles">
+	</div>
+	<div id="score"></div>
+</div>
+</body>
+
+</html>

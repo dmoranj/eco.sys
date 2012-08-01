@@ -1,0 +1,78 @@
+html {
+	margin: -10px;
+	padding: 0px;
+}
+
+div {
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+}
+
+#main {
+	width: 80%;
+	left: 10%;
+	height: 100%;
+	background-color: blue;
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+}
+
+#title {
+	position: absolute;
+	width: 400px;
+	height: 70px;
+	left: 10px;
+	top: 10px;
+	background-color: red;
+}
+
+#opponents {
+	position: absolute;
+	width: 200px;
+	height: 70px;
+	right: 10px;
+	top: 10px;
+	background-color: green;
+}
+
+#board {
+	position: absolute;
+	width: 96%;
+	height: 70%;
+	left: 2%;
+	right: 2%;
+	bottom:20px;
+	top: 85px;
+}
+
+#board > canvas {
+	height: 100%;
+	width: 100%;
+}
+
+#tiles {
+	position: absolute;
+	width: 400px;
+	height: 80px;
+	right: 10px;
+	bottom: 10px;
+	background-color: red;
+}
+
+#score {
+	position: absolute;
+	width: 200px;
+	height: 80px;
+	left: 10px;
+	bottom: 10px;
+	background-color: red;
+}
+
+.tile {
+	height: 60px;
+	width: 30px;
+	background-color: pink;
+	float: left;
+}
