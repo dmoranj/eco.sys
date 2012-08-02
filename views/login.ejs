@@ -11,6 +11,11 @@
     <div id="title"></div>
     <div id="loginData">
         <form action="/login" method="POST">
+            <% if (typeof errorMessage != 'undefined') { %>
+                <div class="error">
+                    <%= errorMessage %>
+                </div>
+            <% } %>
             <div class="formField">
                 Login: <input type="text" length="140" name="login"><br />
             </div>

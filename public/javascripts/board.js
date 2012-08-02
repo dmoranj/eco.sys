@@ -243,13 +243,13 @@ var GameBoard = function() {
 		over: function (ev)
 		{
 			ev.preventDefault();
-			selectSquare(ev.layerX, ev.layerY, ev.dataTransfer.getData("Id"));
+			selectSquare(ev.layerX, ev.layerY, Hand.getSelectedTileId());
 		},
 
 		drop: function (ev)
 		{
 			ev.preventDefault();
-			var tile = Hand.getTile(ev.dataTransfer.getData("Id"));
+			var tile = Hand.getTile(Hand.getSelectedTileId());
 			
 			selectSquare(ev.layerX, ev.layerY, tile.id);
 			

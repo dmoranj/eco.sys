@@ -1,7 +1,9 @@
 var Hand = function() {
 
 	var tiles= {};
-	
+
+    var selectedTileId;
+
 	return {
 		enterTile: function () {
 			$(this).animate({
@@ -21,7 +23,7 @@ var Hand = function() {
 	
 		drag: function (ev)
 		{
-			ev.dataTransfer.setData("Id", ev.target.id);
+            selectedTileId=ev.target.id;
 		},
 		
 		add: function(tile) {
@@ -45,6 +47,10 @@ var Hand = function() {
 		
 		getTile: function(id) {
 			return tiles[id];
-		}
+		},
+
+        getSelectedTileId: function() {
+            return selectedTileId;
+        }
 	};
 }();
