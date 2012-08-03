@@ -1,4 +1,5 @@
 var model = require("../model");
+var utils = require("../utils");
 var async = require("async");
 
 function showHome(req, res) {
@@ -21,6 +22,7 @@ function checkGameRequisites(req, res) {
     var gameToCreate = new Game();
 
     gameToCreate.title = req.body.title;
+    gameToCreate.guid = utils.getUUID();
 
     var splittedPlayers = req.body.users.split(",");
 

@@ -22,6 +22,7 @@ var Player = new Schema ({
 
 var Game = new Schema({
     _id    : ObjectId
+    , guid : String
     , title     : String
     , players      : [Player]
 });
