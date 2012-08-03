@@ -1,0 +1,32 @@
+#createGame {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    left: 20%;
+    top: 15%;
+    background-color: #AAFF66;
+    padding: 10px;
+}
+
+#games {
+    position: absolute;
+    width: 60%;
+    height: 50%;
+    left: 20%;
+    top: 40%;
+    background-color: #AAFF66;
+    padding: 10px;
+}
+
+.formField > input {
+    width: 80%;
+}
+
+.game {
+    height: 45px;
+    padding: 5px;
+}
+
+.player {
+    float: right;
+}

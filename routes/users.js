@@ -12,6 +12,8 @@ function addUser(req, res) {
     userToRegister.surname = req.body.surname;
     userToRegister.email = req.body.email;
     userToRegister.password = req.body.password;
+    userToRegister.nickname = req.body.nickname;
+
 
     userToRegister.save(function (err) {
         if (!err)

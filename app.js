@@ -7,6 +7,7 @@ var express = require('express')
   , gameMod = require('./routes/game')
   , login = require('./routes/login')
   , users = require('./routes/users')
+  , home = require('./routes/home')
   , http = require('http')
   , path = require('path');
 
@@ -45,6 +46,8 @@ function requiresLogin(req, res, next) {
 // List of routes
 //--------------------------------------------------------------------------------
 
+app.get('/home', requiresLogin, home.show);
+
 // User management
 app.get('/login', login.login);
 app.post('/login', login.authenticate);
@@ -52,7 +55,9 @@ app.get('/users/register', users.registerForm);
 app.post('/users/register', users.register);
 
 // Gameplay
-app.get('/game', requiresLogin, gameMod.game);
+app.get('/game/:id', requiresLogin, gameMod.game);
+app.post('/game', requiresLogin, home.create);
+
 
 // Start the server
 //--------------------------------------------------------------------------------

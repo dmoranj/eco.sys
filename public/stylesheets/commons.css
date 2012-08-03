@@ -27,3 +27,15 @@ div {
     top: 10px;
     background-color: red;
 }
+
+.formField {
+    padding: 15px;
+}
+
+.formField > input {
+    float: right;
+}
+
+.buttons {
+    float: right;
+}

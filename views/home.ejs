@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eco.SYS: ecosystems game</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/commons.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/home.css" />
+</head>
+
+<body>
+<div id="main">
+    <div id="title"></div>
+    <div id="createGame">
+        <form action="/game" method="POST">
+            <% if (typeof errorMessage != 'undefined') { %>
+            <div class="error">
+                <%= errorMessage %>
+            </div>
+            <% } %>
+            <% if (typeof infoMessage != 'undefined') { %>
+            <div class="info">
+                <%= infoMessage %>
+            </div>
+            <% } %>
+            <div class="formField">
+                Title: <input type="text" length="200" name="title"><br />
+            </div>
+            <div class="formField">
+                Users: <input type="text" length="200" name="users">
+            </div>
+            <div class="buttons">
+                <input type="submit" value="Create game">
+            </div>
+        </form>
+    </div>
+    <div id="games">
+        <% for (i in games) { %>
+            <div class="game">
+                <div class="gameTitle"><%= games[i].title%></div>
+                <div class="gamePlayers">
+                    <%
+                       var j;
+                       for (j=0; j < games[i].players.length; j++) { %>
+                        <div class="player"><%= games[i].players[j].name%></div>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</div>
+</body>
+
+</html>
