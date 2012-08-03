@@ -35,7 +35,7 @@
     <div id="games">
         <% for (i in games) { %>
             <div class="game">
-                <div class="gameTitle"><%= games[i].title%></div>
+                <div class="gameTitle"><a href="/game/<%= games[i].guid%>"><%= games[i].title%></a></div>
                 <div class="gamePlayers">
                     <%
                        var j;

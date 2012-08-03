@@ -1,3 +1,3 @@
 exports.game = function (req, res) {
-    res.render('game', { title:'The Eco.Sys game' });
+    res.render('game', { guid: req.params.id });
 };
