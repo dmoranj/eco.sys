@@ -47,16 +47,20 @@ function requiresLogin(req, res, next) {
 //--------------------------------------------------------------------------------
 
 app.get('/home', requiresLogin, home.show);
+app.post('/home', requiresLogin, home.create);
 
-// User management
+// Authentication
 app.get('/login', login.login);
 app.post('/login', login.authenticate);
+app.get('/logout', login.logout);
+
+// User management
 app.get('/users/register', users.registerForm);
 app.post('/users/register', users.register);
 
 // Gameplay
 app.get('/game/:id', requiresLogin, gameMod.game);
-app.post('/game', requiresLogin, home.create);
+
 
 
 // Start the server

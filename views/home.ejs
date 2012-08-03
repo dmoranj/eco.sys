@@ -10,7 +10,7 @@
 <div id="main">
     <div id="title"></div>
     <div id="createGame">
-        <form action="/game" method="POST">
+        <form action="/home" method="POST">
             <% if (typeof errorMessage != 'undefined') { %>
             <div class="error">
                 <%= errorMessage %>
@@ -45,6 +45,10 @@
                 </div>
             </div>
         <% } %>
+    </div>
+
+    <div id="commands">
+        <a href="/logout">Log out</a>
     </div>
 </div>
 </body>

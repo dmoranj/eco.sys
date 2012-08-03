@@ -23,5 +23,12 @@ function doAuthentication(req, res) {
     });
 }
 
+function cleanAuthentication(req, res) {
+    delete req.session.user;
+
+    res.redirect('/login');
+}
+
 exports.login = showLogin;
 exports.authenticate = doAuthentication;
+exports.logout = cleanAuthentication;

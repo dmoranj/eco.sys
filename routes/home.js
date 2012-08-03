@@ -24,19 +24,15 @@ function checkGameRequisites(req, res) {
 
     var splittedPlayers = req.body.users.split(",");
 
-    var userChecks = [];
-
-    for (i in splittedPlayers) {
-        userChecks.push(
-            function (callback) {
-                User.findOne({ 'nickname': splittedPlayers[i].trim() }, function (err, docs){
+    function checkNickname(nickToFind, mapCallback) {
+            mapCallback(null, function (callback) {
+                User.findOne({ 'nickname': nickToFind.trim() }, function (err, docs){
                     if (docs)
                         callback(null, true);
                     else
                         callback(null, false);
                 });
-            }
-        );
+            });
     }
 
     function createGame(err, results) {
@@ -63,7 +59,10 @@ function checkGameRequisites(req, res) {
         }
     }
 
-    async.parallel(userChecks, createGame);
+    async.map(splittedPlayers, checkNickname, function (err, results) {
+            async.parallel(results, createGame);
+        }
+    );
 }
 
 exports.show = showHome;

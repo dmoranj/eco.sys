@@ -22,7 +22,7 @@ function addUser(req, res) {
             console.log('Ooooh' + err);
     });
 
-    res.render('login', { title:'Eco.Sys: User login page'});
+    res.redirect('/login');
 }
 
 exports.registerForm = showRegister;

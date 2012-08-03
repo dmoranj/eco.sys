@@ -18,6 +18,16 @@
     padding: 10px;
 }
 
+#commands {
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    right: 5%;
+    bottom: 5%;
+    background-color: #AAFF66;
+    padding: 10px;
+}
+
 .formField > input {
     width: 80%;
 }
