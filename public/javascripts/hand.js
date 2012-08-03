@@ -24,6 +24,7 @@ var Hand = function() {
 		drag: function (ev)
 		{
             selectedTileId=ev.target.id;
+            ev.dataTransfer.setData("Id", ev.target.id);
 		},
 		
 		add: function(tile) {

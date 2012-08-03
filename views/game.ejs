@@ -4,17 +4,21 @@
 <title>Eco.SYS: ecosystems game</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/commons.css" />
 <link rel="stylesheet" type="text/css" href="/stylesheets/board.css" />
+<script src="/socket.io/socket.io.js"></script>
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/jquery.form.js"></script>
+<script src="/javascripts/server.js"></script>
 <script src="/javascripts/tile.js"></script>
 <script src="/javascripts/board.js"></script>
 <script src="/javascripts/hand.js"></script>
 <script src="/javascripts/main.js"></script>
+
 </head>
 
 <body>
 <div id="main">
-    <input type="hidden" name="guid" value="<%= guid %>" />
+    <input type="hidden" id="guid" value="<%= guid %>" />
+    <input type="hidden" id="player" value="<%= player %>" />
 	<div id="title"></div>
 	<div id="opponents">
 		<input type="button" value="+10x" onclick="GameBoard.moveViewport(10, 0)" />

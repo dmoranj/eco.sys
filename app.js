@@ -8,6 +8,8 @@ var express = require('express')
   , login = require('./routes/login')
   , users = require('./routes/users')
   , home = require('./routes/home')
+  , clientManager = require('./routes/clientManager')
+  , io = require('socket.io')
   , http = require('http')
   , path = require('path');
 
@@ -63,8 +65,12 @@ app.get('/game/:id', requiresLogin, gameMod.game);
 
 
 
-// Start the server
+// Start the servers
 //--------------------------------------------------------------------------------
-http.createServer(app).listen(app.get('port'), function(){
+var httpServer = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+var webSocket = io.listen(httpServer);
+
+webSocket.sockets.on('connection', clientManager.newConnection);

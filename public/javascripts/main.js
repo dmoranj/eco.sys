@@ -1,5 +1,6 @@
 $(document).ready(function (){
-	
+
+    Server.init();
 	GameBoard.init();
 	
 	var shape1 = [{guid: 0, dx: 0, dy:0, right: 1, bottom: 2},
@@ -16,14 +17,57 @@ $(document).ready(function (){
 	              {guid: 1, dx: 1, dy:0, left: 0},
 	              {guid: 2, dx: 0, dy:-1, bottom: 0}
 	              ];
-	
-	Hand.add(new Tile(1, shape1, [], [1]));
-	Hand.add(new Tile(2, shape2, [1], [2, 3]));
-	Hand.add(new Tile(3, shape3, [1, 2], [3]));
-	Hand.add(new Tile(4, shape1, [3], [1, 2, 3]));
-	Hand.add(new Tile(5, shape2, [], [2]));
-	Hand.add(new Tile(6, shape3, [1, 3], [2]));
-	
+
+    var player = document.getElementById("player").value;
+
+	Hand.add(new Tile({
+        id:         1,
+        tiles:      shape1,
+        consumes:   [],
+        produces:   [1],
+        owner: player
+    }));
+
+    Hand.add(new Tile({
+        id:         2,
+        tiles:      shape2,
+        consumes:   [1],
+        produces:   [2, 3],
+        owner: player
+    }));
+
+    Hand.add(new Tile({
+        id:         3,
+        tiles:      shape3,
+        consumes:   [1, 2],
+        produces:   [3],
+        owner: player
+    }));
+
+    Hand.add(new Tile({
+        id:         4,
+        tiles:      shape1,
+        consumes:   [3],
+        produces:   [1, 2, 3],
+        owner: player
+    }));
+
+    Hand.add(new Tile({
+        id:         5,
+        tiles:      shape2,
+        consumes:   [],
+        produces:   [2],
+        owner: player
+    }));
+
+    Hand.add(new Tile({
+        id:         6,
+        tiles:      shape1,
+        consumes:   [1, 3],
+        produces:   [2],
+        owner: player
+    }));
+
 	$(".tile").mouseenter(Hand.enterTile);
 	$(".tile").mouseleave(Hand.leaveTile);
 });

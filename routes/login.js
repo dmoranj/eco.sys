@@ -7,7 +7,7 @@ function showLogin(req, res) {
 function doAuthentication(req, res) {
     var User = model.mongoose.model('User');
 
-    User.findOne({ 'email': req.body.login }, function (err, doc) {
+    User.findOne({ 'nickname': req.body.login }, function (err, doc) {
 
         if (doc && doc.password==req.body.password) {
             req.session.user = req.body.login;

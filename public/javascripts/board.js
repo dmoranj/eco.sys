@@ -98,9 +98,19 @@ var GameBoard = function() {
 			drawSelectedSquare(tileId);
 		}
 	}
-	
+
+    function sendTile(tile) {
+        var socket = io.connect('http://localhost');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+        });
+    }
+
 	function add(tile) {
-		tiles[tile.id]=tile;
+        if (tiles[tile.id]==undefined) {
+            tiles[tile.id]=tile;
+        }
 	}
 	
 	function calculateBorderSquares(tile) {
@@ -221,6 +231,12 @@ var GameBoard = function() {
 			canvas.width=board.clientWidth;
 			tileDimensions= {x: canvas.width/maxViewportDimensions.x,
 							 y:canvas.height/maxViewportDimensions.y};
+
+            Server.addListener('updateBoard', function (data) {
+                add(new Tile(data));
+                draw();
+            });
+
 			draw();
 		}, 
 		
@@ -257,6 +273,7 @@ var GameBoard = function() {
 				tile.x= selectedSquare.x + viewport.x;
 				tile.y= selectedSquare.y + viewport.y;
 				add(tile);
+                Server.send("place", tile);
 				Hand.remove(tile);
 			} else {
 				draw();

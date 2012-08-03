@@ -9,6 +9,7 @@
     "express": "3.0.0rc1",
     "ejs": "*",
     "mongoose" : "*",
-    "async": "*"
+    "async": "*",
+    "socket.io": "*"
   }
 }
