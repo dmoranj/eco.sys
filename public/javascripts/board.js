@@ -237,6 +237,19 @@ var GameBoard = function() {
                 draw();
             });
 
+            Server.send('init', {
+                guid: $("#guid")[0].value,
+                player: $("#player")[0].value
+            });
+
+            Server.addListener('initialConfiguration', function(data) {
+                for (var i in data.player.hand)
+                    Hand.add(new Tile(data.player.hand[i]));
+
+                $(".tile").mouseenter(Hand.enterTile);
+                $(".tile").mouseleave(Hand.leaveTile);
+            });
+
 			draw();
 		}, 
 		

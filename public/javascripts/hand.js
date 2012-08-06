@@ -4,19 +4,21 @@ var Hand = function() {
 
     var selectedTileId;
 
+
+
 	return {
 		enterTile: function () {
 			$(this).animate({
-				"width": "60px",
-				"height": "120px",
+				"width": "70px",
+				"height": "150px",
 				"margin-top": "-50px"
 			}, 300);
 		},
 		
 		leaveTile: function() {
 			$(this).animate({
-				"width": "30px",
-				"height": "60px",
+				"width": "50px",
+				"height": "100px",
 				"margin-top": "0px"
 			}, 300);
 		},
@@ -29,15 +31,10 @@ var Hand = function() {
 		
 		add: function(tile) {
 			tiles[tile.id]=(tile);
-			
-			var tileTag = document.createElement("div"); 
-			tileTag.id = tile.id;
-			tileTag.className = "tile";
-			tileTag.setAttribute("draggable", "true");
-			tileTag.setAttribute("ondragstart", "Hand.drag(event)");
-			tileTag.innerHTML=tile.id;
-			
-			$("#tiles").append(tileTag); 
+
+            var tileTag = tile.drawCard();
+
+            $("#tiles").append(tileTag);
 		},
 		
 		remove: function(tile) {

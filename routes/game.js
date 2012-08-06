@@ -1,6 +1,11 @@
-exports.game = function (req, res) {
+
+function showGame(req, res) {
     res.render('game', {
         guid: req.params.id,
         player: req.session.user
     });
 };
+
+
+
+exports.game = showGame;

@@ -1,5 +1,6 @@
 var model = require("../model");
 var utils = require("../utils");
+var tiles = require("../tiles");
 var async = require("async");
 
 function showHome(req, res) {
@@ -15,20 +16,38 @@ function showHome(req, res) {
     });
 }
 
-function checkGameRequisites(req, res) {
+function createGameEntity(title, players) {
     var Game = model.mongoose.model('Game');
-    var User = model.mongoose.model('User');
-
     var gameToCreate = new Game();
 
-    gameToCreate.title = req.body.title;
+    gameToCreate.title = title;
     gameToCreate.guid = utils.getUUID();
+    gameToCreate.deck = tiles.generateDeck();
+    gameToCreate.placedTiles = [];
 
+    for (i in players) {
+        gameToCreate.players.push({
+            name: players[i].trim(),
+            score: 0,
+            hand: []
+        });
+
+        tiles.drawInitialHand(gameToCreate, players[i].trim());
+    }
+
+    return gameToCreate;
+}
+
+function checkGameRequisites(req, res) {
+
+    var User = model.mongoose.model('User');
     var splittedPlayers = req.body.users.split(",");
+
+    var gameToCreate = createGameEntity(req.body.title, splittedPlayers);
 
     function checkNickname(nickToFind, mapCallback) {
             mapCallback(null, function (callback) {
-                User.findOne({ 'nickname': nickToFind.trim() }, function (err, docs){
+                User.findOne({ 'nickname': nickToFind.name }, function (err, docs){
                     if (docs)
                         callback(null, true);
                     else
@@ -46,9 +65,6 @@ function checkGameRequisites(req, res) {
             res.errorMessage= "At least one of the players didn't exist.";
             showHome(req, res);
         }else {
-            for (i in splittedPlayers) {
-                gameToCreate.players.push({name: splittedPlayers[i].trim()});
-            }
 
             gameToCreate.save(function (err) {
                 if (!err)
@@ -61,7 +77,7 @@ function checkGameRequisites(req, res) {
         }
     }
 
-    async.map(splittedPlayers, checkNickname, function (err, results) {
+    async.map(gameToCreate.players, checkNickname, function (err, results) {
             async.parallel(results, createGame);
         }
     );

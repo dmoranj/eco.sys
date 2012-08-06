@@ -17,7 +17,10 @@ var Tile = function(data) {
 	
 	var resourceColor = {1: "#FF0000",
 						 2: "#00FF00",
-						 3: "#0000FF"
+						 3: "#0000FF",
+                         4: "#FF00FF",
+                         5: "#00FFFF",
+                         6: "#FA00FA"
 						 };
 
     data.draw = function(ctx, x, y, tileWidth, tileHeight) {
@@ -106,6 +109,45 @@ var Tile = function(data) {
 
         ctx.strokeStyle="#000000";
         ctx.lineWidth=1;
+    };
+
+    data.drawSVGElements  = function() {
+        var svgCode= '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">';
+
+        for (var i in data.produces) {
+            svgCode+= '<circle cx="'+ ((parseInt(i) + 1)*12);
+            svgCode+= '" cy="30" r="5" stroke="black" stroke-width="1" fill="' + resourceColor[data.produces[i]];
+            svgCode+= '" />';
+        }
+
+        for (var i in data.consumes) {
+            svgCode+= '<rect x="'+ ((parseInt(i) + 0.5)*12);
+            svgCode+= '" y="10" width="10" height="10" stroke="black" stroke-width="1" fill="' + resourceColor[data.consumes[i]];
+            svgCode+= '" />';
+        }
+
+        for (var i in data.tiles) {
+            svgCode+= '<rect x="'+ ((data.tiles[i].dx + 1)*12);
+            svgCode+= '" y="' + (50 + (data.tiles[i].dy)*11) + '" ';
+            svgCode+= ' width="10" height="10" stroke="black" stroke-width="1" fill="black" />';
+        }
+
+        svgCode+= '</svg>';
+
+        return svgCode;
+    };
+
+    data.drawCard = function() {
+        var tileTag = document.createElement("div");
+        tileTag.id = data.id;
+        tileTag.className = "tile";
+        tileTag.setAttribute("draggable", "true");
+        tileTag.setAttribute("ondragstart", "Hand.drag(event)");
+
+        var svgCode= data.drawSVGElements();
+
+        tileTag.innerHTML = svgCode;
+        return tileTag;
     };
 
 	return data;
