@@ -2,11 +2,30 @@ var async = require("async");
 var model = require("../model");
 var board = require("../board");
 
-var clients=[];
+var clients={};
+
+function sendMessage(gameId, player, event, data) {
+    clients[player][gameId].emit(event, data);
+}
+
+function broadcastMessage(gameId, event, data) {
+    var Game = model.mongoose.model('Game');
+
+    Game.findOne({'guid' : gameId }, function (err, doc) {
+        for (var i=0; i < doc.players.length; i++) {
+            clients[doc.players[i].name][doc.guid].emit(event, data);
+        };
+    });
+}
 
 function manageConnection (socket) {
-    function connectClient(socket) {
-        clients.push(socket);
+    function connectClient(socket, gameId, player) {
+
+        if (clients[player]==undefined) {
+            clients[player]={};
+        }
+
+        clients[player][gameId]= socket;
     }
 
     function disconnectClient(socket) {
@@ -14,19 +33,15 @@ function manageConnection (socket) {
     }
 
     function placeTile(data) {
-
         board.placeTile(data.gameId, data.tile);
 
-        async.map(clients, function(client, callback) {
-                client.emit('updateBoard', data);
-            }
-        );
+        broadcastMessage(data.gameId, 'updateBoard', data);
     }
 
     function initBoard(data) {
-
-        // GET { gameId, playerId }
         var Game = model.mongoose.model('Game');
+
+        connectClient(socket, data.guid, data.player);
 
         Game.findOne({'guid' : data.guid }, function (err, doc) {
 
@@ -35,16 +50,16 @@ function manageConnection (socket) {
             for (var i in doc.players) {
                 if (doc.players[i].name==data.player) {
                     result.player = doc.players[i];
+                    break;
                 }
             }
 
             result.placedTiles = doc.placedTiles;
+            result.currentPlayer = doc.currentPlayer;
 
             socket.emit('initialConfiguration', result);
         });
     }
-
-    connectClient(socket);
 
     socket.on('init', initBoard);
     socket.on('place', placeTile);
@@ -52,3 +67,5 @@ function manageConnection (socket) {
 }
 
 exports.newConnection = manageConnection;
+exports.send = sendMessage;
+exports.broadcast= broadcastMessage;

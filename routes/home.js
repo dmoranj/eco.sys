@@ -24,6 +24,7 @@ function createGameEntity(title, players) {
     gameToCreate.guid = utils.getUUID();
     gameToCreate.deck = tiles.generateDeck();
     gameToCreate.placedTiles = [];
+    gameToCreate.currentPlayer = players[0].trim();
 
     for (i in players) {
         gameToCreate.players.push({

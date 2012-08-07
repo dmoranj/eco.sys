@@ -252,6 +252,12 @@ var GameBoard = function() {
                 $(".tile").mouseenter(Hand.enterTile);
                 $(".tile").mouseleave(Hand.leaveTile);
 
+                if (data.currentPlayer == $("#player")[0].value) {
+                    Hand.show();
+                } else {
+                    Hand.hide();
+                }
+
                 draw();
             });
 
@@ -294,6 +300,7 @@ var GameBoard = function() {
 				add(tile);
                 Server.send("place", {tile: tile, gameId: $("#guid")[0].value});
 				Hand.remove(tile);
+                Hand.hide();
 			} else {
 				draw();
 			}

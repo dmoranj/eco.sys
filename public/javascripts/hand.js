@@ -49,6 +49,14 @@ var Hand = function() {
 
         getSelectedTileId: function() {
             return selectedTileId;
+        },
+
+        hide: function() {
+            $("#tiles").css("display", "none");
+        },
+
+        show: function() {
+            $("#tiles").css("display", "block");
         }
 	};
 }();

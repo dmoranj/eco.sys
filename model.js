@@ -52,6 +52,7 @@ var Game = new Schema({
     , players      : [Player]
     , deck         : [Card]
     , placedTiles  : [Card]
+    , currentPlayer : String
 });
 
 mongoose.model('User', User);
