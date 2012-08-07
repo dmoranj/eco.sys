@@ -233,7 +233,7 @@ var GameBoard = function() {
 							 y:canvas.height/maxViewportDimensions.y};
 
             Server.addListener('updateBoard', function (data) {
-                add(new Tile(data));
+                add(new Tile(data.tile));
                 draw();
             });
 
@@ -246,8 +246,13 @@ var GameBoard = function() {
                 for (var i in data.player.hand)
                     Hand.add(new Tile(data.player.hand[i]));
 
+                for (var i in data.placedTiles)
+                    add(new Tile(data.placedTiles[i]));
+
                 $(".tile").mouseenter(Hand.enterTile);
                 $(".tile").mouseleave(Hand.leaveTile);
+
+                draw();
             });
 
 			draw();
@@ -285,8 +290,9 @@ var GameBoard = function() {
 			if (spaceAvailableFor(tile)&&rightChoice(tile)) {
 				tile.x= selectedSquare.x + viewport.x;
 				tile.y= selectedSquare.y + viewport.y;
+                tile.owner= $("#player")[0].value;
 				add(tile);
-                Server.send("place", tile);
+                Server.send("place", {tile: tile, gameId: $("#guid")[0].value});
 				Hand.remove(tile);
 			} else {
 				draw();

@@ -6,6 +6,4 @@ function showGame(req, res) {
     });
 };
 
-
-
 exports.game = showGame;

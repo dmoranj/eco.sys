@@ -31,8 +31,11 @@ var Card = new Schema ({
     , consumes : [Number]
     , produces : [Number]
     , tiles    : [Tile]
+    , x        : Number
+    , y        : Number
     , id       : String
     , type     : String
+    , owner    : String
 });
 
 var Player = new Schema ({

@@ -1,5 +1,6 @@
 var async = require("async");
 var model = require("../model");
+var board = require("../board");
 
 var clients=[];
 
@@ -13,6 +14,9 @@ function manageConnection (socket) {
     }
 
     function placeTile(data) {
+
+        board.placeTile(data.gameId, data.tile);
+
         async.map(clients, function(client, callback) {
                 client.emit('updateBoard', data);
             }

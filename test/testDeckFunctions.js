@@ -26,8 +26,6 @@ describe('tiles', function(){
             done();
         })
 
-
-
         it('should generate enough cards', function(done){
 
             // Given
@@ -57,6 +55,40 @@ describe('tiles', function(){
                 assert.equal(true, ids.indexOf(deck[i].id) < 0);
                 ids.push(deck[i].id);
             }
+
+            done();
+        })
+    })
+
+    describe('#removeCard()', function(){
+        it('should remove the selected card from the players hand', function(done){
+            // Given
+            var game = {
+                players: [
+                    {
+                        name: "test1",
+                        hand: [
+                            { id: 'card_1_1' },
+                            { id: 'card_1_2' }
+                        ]
+                    },
+                    {
+                        name: "test2",
+                        hand: [
+                            { id: 'card_2_1' },
+                            { id: 'card_2_2' }
+                        ]
+                    }
+                ]
+            };
+
+            // When
+            tiles.remove(game, "test1", { id: 'card_1_2' });
+
+            // Then
+            assert.equal(game.players[0].hand.length, 1);
+            assert.equal(game.players[0].hand[0].id, 'card_1_1');
+            assert.equal(game.players[1].hand.length, 2);
 
             done();
         })

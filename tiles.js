@@ -38,7 +38,7 @@ var cardTemplates = {
     3:function () {
         return {
             consumes:[1, 2],
-            produces:[3],
+            produces:[2, 3],
             tiles:shapes.square
         }
     },
@@ -58,8 +58,8 @@ var cardTemplates = {
     },
     6:function () {
         return {
-            consumes: [1, 3],
-            produces: [2],
+            consumes: [1],
+            produces: [2, 3],
             tiles: shapes.square
         }
     }
@@ -113,7 +113,23 @@ function drawHands(game, player) {
     }
 }
 
+function removeCard(game, card) {
+    players: for (var i in game.players) {
+        if (game.players[i].name==card.owner) {
+            for (var j in game.players[i].hand) {
+                if (game.players[i].hand[j].id==card.id) {
+                    game.players[i].hand.splice(j, 1);
+                    break players;
+                }
+            }
+
+            break;
+        }
+    }
+}
+
 exports.generateDeck = createDeck;
 exports.draw = drawCard;
+exports.remove = removeCard;
 exports.drawInitialHand = drawHands;
 exports.getDeckComposition= function() {return deckComposition;}
