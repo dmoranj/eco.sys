@@ -22,12 +22,15 @@
     <input type="hidden" id="player" value="<%= player %>" />
 	<div id="title"></div>
 	<div id="opponents">
-		<input type="button" value="+10x" onclick="GameBoard.moveViewport(10, 0)" />
-		<input type="button" value="-10x" onclick="GameBoard.moveViewport(-10, 0)" />
-		<input type="button" value="+10y" onclick="GameBoard.moveViewport(0, 10)" />
-		<input type="button" value="-10y" onclick="GameBoard.moveViewport(0, -10)" />
+
 	</div>
-	<div id="board">
+    <div id="buttons">
+        <input type="button" value="+10x" onclick="GameBoard.moveViewport(10, 0)" />
+        <input type="button" value="-10x" onclick="GameBoard.moveViewport(-10, 0)" />
+        <input type="button" value="+10y" onclick="GameBoard.moveViewport(0, 10)" />
+        <input type="button" value="-10y" onclick="GameBoard.moveViewport(0, -10)" />
+    </div>
+    <div id="board">
 		<canvas 
 			id="canvasBoard"
 			height="800" 

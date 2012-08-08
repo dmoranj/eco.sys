@@ -36,12 +36,13 @@ var Card = new Schema ({
     , id       : String
     , type     : String
     , owner    : String
+    , score    : Number
 });
 
 var Player = new Schema ({
     _id    : ObjectId
     , name     : String
-    , score      : String
+    , score      : Number
     , hand      : [Card]
 });
 

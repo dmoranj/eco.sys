@@ -1,10 +1,32 @@
-#opponents {
+#buttons {
 	position: absolute;
 	width: 200px;
 	height: 70px;
 	right: 10px;
 	top: 10px;
 	background-color: green;
+}
+
+#opponents {
+    position: absolute;
+    width: 300px;
+    height: 70px;
+    right: 250px;
+    top: 10px;
+    background-color: green;
+}
+
+.opponent {
+    margin: 5px;
+    float: left;
+    width: 50px;
+    height: 58px;
+}
+
+.opponent > .name, .opponent > .score {
+    height: 20px;
+    margin: 2px;
+    padding: 2px;
 }
 
 #board {
@@ -38,6 +60,9 @@
 	left: 10px;
 	bottom: 10px;
 	background-color: red;
+    padding: 10px;
+    font-size: 50pt;
+    text-align: center;
 }
 
 .tile {

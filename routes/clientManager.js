@@ -13,7 +13,9 @@ function broadcastMessage(gameId, event, data) {
 
     Game.findOne({'guid' : gameId }, function (err, doc) {
         for (var i=0; i < doc.players.length; i++) {
-            clients[doc.players[i].name][doc.guid].emit(event, data);
+            if (clients[doc.players[i].name] && clients[doc.players[i].name][doc.guid]) {
+                clients[doc.players[i].name][doc.guid].emit(event, data);
+            }
         };
     });
 }
@@ -46,11 +48,16 @@ function manageConnection (socket) {
         Game.findOne({'guid' : data.guid }, function (err, doc) {
 
             var result= {};
+            result.opponents=[];
 
-            for (var i in doc.players) {
+            for (var i=0; i < doc.players.length; i++) {
                 if (doc.players[i].name==data.player) {
                     result.player = doc.players[i];
-                    break;
+                } else {
+                    result.opponents.push({
+                        name: doc.players[i].name,
+                        score: doc.players[i].score
+                    });
                 }
             }
 

@@ -47,7 +47,7 @@ function requiresLogin(req, res, next) {
 
 // List of routes
 //--------------------------------------------------------------------------------
-
+app.get('/', requiresLogin, home.show);
 app.get('/home', requiresLogin, home.show);
 app.post('/home', requiresLogin, home.create);
 

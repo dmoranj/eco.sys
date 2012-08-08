@@ -1,6 +1,5 @@
 var utils = require('./utils')
 
-
 var shapes = {
     l:[
         {guid:0, dx:0, dy:0, right:1, bottom:2},
@@ -25,42 +24,48 @@ var cardTemplates = {
         return {
             consumes:[],
             produces:[1],
-            tiles:shapes.l
+            tiles:shapes.l,
+            score: 1
         }
     },
     2:function () {
         return {
             consumes:[1],
             produces:[2, 3],
-            tiles:shapes.line
+            tiles:shapes.line,
+            score: 3
         }
     },
     3:function () {
         return {
             consumes:[1, 2],
             produces:[2, 3],
-            tiles:shapes.square
+            tiles:shapes.square,
+            score: 10
         }
     },
     4:function () {
         return {
             consumes:[3],
             produces:[1, 2, 3],
-            tiles:shapes.l
+            tiles:shapes.l,
+            score: 5
         }
     },
     5:function () {
         return {
             consumes:[],
             produces:[2],
-            tiles:shapes.line
+            tiles:shapes.line,
+            score: 1
         }
     },
     6:function () {
         return {
             consumes: [1],
             produces: [2, 3],
-            tiles: shapes.square
+            tiles: shapes.square,
+            score: 3
         }
     }
 };
