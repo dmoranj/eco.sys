@@ -270,9 +270,6 @@ var GameBoard = function() {
                 for (var i in data.placedTiles)
                     add(new Tile(data.placedTiles[i]));
 
-                $(".tile").mouseenter(Hand.enterTile);
-                $(".tile").mouseleave(Hand.leaveTile);
-
                 if (data.currentPlayer == $("#player")[0].value) {
                     Hand.show();
                 } else {

@@ -112,7 +112,7 @@ var Tile = function(data) {
     };
 
     data.drawSVGElements  = function() {
-        var svgCode= '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">';
+        var svgCode= '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="50px" height="100px">';
 
         for (var i in data.produces) {
             svgCode+= '<circle cx="'+ ((parseInt(i) + 1)*12);

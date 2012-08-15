@@ -108,14 +108,11 @@ function drawCard(game, player) {
         }
     }
 
-    console.log("Cards in the hand before : " + game.players[i].hand.length);
     var card = game.deck.pop();
     if (card) {
         card.owner = player;
         game.players[i].hand.push(card);
     }
-
-    console.log("Drawing card for: " + player + " number of deck cards " + game.deck.length + " and hand cards " + game.players[i].hand.length);
 
     return card;
 }
