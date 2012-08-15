@@ -25,11 +25,15 @@
 
 	</div>
     <div id="buttons">
-        <input type="button" value="+10x" onclick="GameBoard.moveViewport(10, 0)" />
-        <input type="button" value="-10x" onclick="GameBoard.moveViewport(-10, 0)" />
-        <input type="button" value="+10y" onclick="GameBoard.moveViewport(0, 10)" />
-        <input type="button" value="-10y" onclick="GameBoard.moveViewport(0, -10)" />
+        <input type="button" value="Pass" />
+        <input type="button" value="New hand" />
     </div>
+
+    <div id="scrollLeft" class="scroll"></div>
+    <div id="scrollRight" class="scroll"></div>
+    <div id="scrollTop" class="scroll"></div>
+    <div id="scrollBottom" class="scroll"></div>
+
     <div id="board">
 		<canvas 
 			id="canvasBoard"

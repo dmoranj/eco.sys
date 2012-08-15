@@ -36,7 +36,7 @@
 	left: 2%;
 	right: 2%;
 	bottom:20px;
-	top: 85px;
+	top: 120px;
 }
 
 #board > canvas {
@@ -70,4 +70,38 @@
 	width: 50px;
 	background-color: pink;
 	float: left;
+}
+
+.scroll {
+    position: absolute;
+    background-color: #00d6b2;
+    z-index: 20;
+}
+
+#scrollLeft {
+    width: 50px;
+    height: 50%;
+    left: 10px;
+    top: 20%;
+}
+
+#scrollRight {
+    width: 50px;
+    height: 50%;
+    right: 10px;
+    top: 20%;
+}
+
+#scrollBottom {
+    height: 50px;
+    width: 50%;
+    bottom: 15%;
+    left: 25%;
+}
+
+#scrollTop {
+    height: 50px;
+    width: 50%;
+    top: 100px;
+    left: 25%;
 }

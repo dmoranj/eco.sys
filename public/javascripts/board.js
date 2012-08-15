@@ -222,7 +222,21 @@ var GameBoard = function() {
 		
 		return true;
 	}
-	
+
+    function setScroll(scrollId, dx, dy) {
+        var scrollTimer=null;
+
+        $(scrollId).mouseenter(function(){
+            scrollTimer= setInterval(function(){
+                GameBoard.moveViewport(dx, dy);
+            },100);
+        });
+
+        $(scrollId).mouseleave(function() {
+            clearInterval(scrollTimer);
+        });
+    }
+
 	return {
 		init: function() {
 			canvas= document.getElementById("canvasBoard");
@@ -231,6 +245,13 @@ var GameBoard = function() {
 			canvas.width=board.clientWidth;
 			tileDimensions= {x: canvas.width/maxViewportDimensions.x,
 							 y:canvas.height/maxViewportDimensions.y};
+
+            var scrollTimer=null;
+
+            setScroll("#scrollLeft", 7, 0);
+            setScroll("#scrollRight", -7, 0);
+            setScroll("#scrollTop", 0, 7);
+            setScroll("#scrollBottom", 0, -7);
 
             Server.addListener('updateBoard', function (data) {
                 add(new Tile(data.tile));
