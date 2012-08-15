@@ -90,7 +90,7 @@ var Tile = function(data) {
             ctx.fillStyle = oldFillStyle;
         }
 
-        ctx.fillStyle = "#DDDDDD";
+        ctx.fillStyle = Game.getColor(this.owner);
         ctx.beginPath();
         drawShape(this.tiles[0]);
         ctx.closePath();

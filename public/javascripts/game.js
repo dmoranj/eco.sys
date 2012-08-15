@@ -64,6 +64,10 @@ var Game = function() {
 
                 $("#score").text(data.player.score);
             });
+        },
+
+        getColor: function(player) {
+            return assignedColors[player];
         }
     };
 }();

@@ -4,8 +4,9 @@
     height: 20%;
     left: 35%;
     top: 40%;
-    background-color: #AAFF66;
     padding: 10px;
+    border-style: solid;
+    background-color: #d3d3d3;
 }
 
 #registerData {
@@ -14,7 +15,8 @@
     height: 30%;
     left: 30%;
     top: 40%;
-    background-color: #AAFF66;
     padding: 10px;
+    border-style: solid;
+    background-color: #d3d3d3;
 }
 
