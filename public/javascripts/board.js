@@ -47,11 +47,6 @@ var GameBoard = function() {
 		for (i=-1; i < maxViewportDimensions.x+1; i++) {
 			ctx.moveTo(i*tileDimensions.x + dViewport.x, 0);
 			ctx.lineTo(i*tileDimensions.x + dViewport.x, canvas.height);
-			
-			for (j=-1; j < maxViewportDimensions.y+1; j++) {
-				ctx.font="10px Arial";
-				ctx.strokeText("(" + (i + viewport.x) + "," + (j + viewport.y) + ")", i*tileDimensions.x + dViewport.x + 7, j*tileDimensions.y + dViewport.y + 35);			
-			}
 		}
 		
 		for (i=0; i < maxViewportDimensions.y+1; i++) {

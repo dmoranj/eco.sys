@@ -90,7 +90,7 @@ var Tile = function(data) {
             ctx.fillStyle = oldFillStyle;
         }
 
-        ctx.fillStyle = "#AA33BB";
+        ctx.fillStyle = "#DDDDDD";
         ctx.beginPath();
         drawShape(this.tiles[0]);
         ctx.closePath();
@@ -100,7 +100,7 @@ var Tile = function(data) {
         drawGrants();
 
         ctx.beginPath();
-        ctx.strokeStyle="#FF0000";
+        ctx.strokeStyle="#444444";
         ctx.lineWidth=4;
         drawn = [];
         drawPerimeter(this.tiles[0]);
