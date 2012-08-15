@@ -71,11 +71,11 @@ var cardTemplates = {
 };
 
 var deckComposition = {
-    1:3,
+    1:5,
     2:3,
     3:3,
     4:5,
-    5:5,
+    5:10,
     6:5
 };
 
@@ -107,9 +107,17 @@ function drawCard(game, player) {
             break;
         }
     }
+
+    console.log("Cards in the hand before : " + game.players[i].hand.length);
     var card = game.deck.pop();
-    card.owner = player;
-    game.players[i].hand.push(card);
+    if (card) {
+        card.owner = player;
+        game.players[i].hand.push(card);
+    }
+
+    console.log("Drawing card for: " + player + " number of deck cards " + game.deck.length + " and hand cards " + game.players[i].hand.length);
+
+    return card;
 }
 
 function drawHands(game, player) {
@@ -124,7 +132,7 @@ function removeCard(game, card) {
             for (var j in game.players[i].hand) {
                 if (game.players[i].hand[j].id==card.id) {
                     game.players[i].hand.splice(j, 1);
-                    break players;
+                    return;
                 }
             }
 

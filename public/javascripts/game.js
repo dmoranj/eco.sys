@@ -24,6 +24,10 @@ var Game = function() {
                     Hand.show();
                 }
 
+                if (data.drawnCard && data.drawnCard.owner == $("#player")[0].value) {
+                    Hand.add(new Tile(data.drawnCard));
+                }
+
                 for (var i=0; i < data.scores.length; i++) {
                     if (data.scores[i].name==$("#player")[0].value) {
                         $("#score").text(data.scores[i].score);

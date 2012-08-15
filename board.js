@@ -11,29 +11,34 @@ function place(gameId, tile) {
     Game.findOne({guid:gameId}, function (err, doc) {
 
         doc.placedTiles.push(tile);
-        tiles.remove(doc, tile);
+        oldCard = tiles.remove(doc, tile);
         game.score(doc, tile);
-        game.nextPlayer(doc);
 
-        doc.save(function (err) {
+        doc.save(function (err, savedGame) {
             if (err) {
                 console.log("Error placing tile: " + err);
             } else {
-                async.map(
-                    doc.players,
-                    function (data, callback) {
-                        callback(null, {
-                            score:data.score,
-                            name:data.name
-                        });
-                    },
-                    function (err, results) {
-                        clientManager.broadcast(doc.guid, "updateGame", {
-                            currentPlayer:doc.currentPlayer,
-                            scores:results
-                        });
-                    }
-                );
+                newCard = tiles.draw(savedGame, savedGame.currentPlayer);
+                game.nextPlayer(doc);
+
+                savedGame.save(function(err, finalGame) {
+                    async.map(
+                        finalGame.players,
+                        function (data, callback) {
+                            callback(null, {
+                                score:data.score,
+                                name:data.name
+                            });
+                        },
+                        function (err, results) {
+                            clientManager.broadcast(finalGame.guid, "updateGame", {
+                                currentPlayer:finalGame.currentPlayer,
+                                scores:results,
+                                drawnCard: newCard
+                            });
+                        }
+                    );
+                });
             }
         });
     });

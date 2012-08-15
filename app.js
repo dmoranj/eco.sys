@@ -11,19 +11,22 @@ var express = require('express')
   , clientManager = require('./routes/clientManager')
   , io = require('socket.io')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , fs = require('fs');
 
 var MemoryStore = express.session.MemoryStore,
     sessionStore = new MemoryStore();
 
 var app = express();
 
+var logFile = fs.createWriteStream('./express.log', {flags: 'a'});
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.favicon());
-  app.use(express.logger('dev'));
+  app.use(express.logger({stream: logFile}));
   app.use(express.bodyParser());
   app.use(express.cookieParser());
   app.use(express.session({ secret: "keyboard cat"}));
@@ -71,6 +74,8 @@ var httpServer = http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 
+
 var webSocket = io.listen(httpServer);
+webSocket.set('log level', 1)
 
 webSocket.sockets.on('connection', clientManager.newConnection);
