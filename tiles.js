@@ -117,9 +117,17 @@ function drawCard(game, player) {
     return card;
 }
 
-function drawHands(game, player) {
+function drawHand(game, player) {
     for (var i=0; i < 7; i++) {
         drawCard(game, player);
+    }
+}
+
+function dropHand(game, player) {
+    players: for (var i in game.players) {
+        if (game.players[i].name==player) {
+            game.players[i].hand.splice(0, game.players[i].hand.length);
+        }
     }
 }
 
@@ -140,6 +148,7 @@ function removeCard(game, card) {
 
 exports.generateDeck = createDeck;
 exports.draw = drawCard;
+exports.dropHand = dropHand;
 exports.remove = removeCard;
-exports.drawInitialHand = drawHands;
+exports.drawInitialHand = drawHand;
 exports.getDeckComposition= function() {return deckComposition;}

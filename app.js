@@ -65,6 +65,7 @@ app.post('/users/register', users.register);
 
 // Gameplay
 app.get('/game/:id', requiresLogin, gameMod.game);
+app.post('/game/:id/action/drawHand', requiresLogin, gameMod.drawNewHand);
 
 
 

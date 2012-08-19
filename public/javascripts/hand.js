@@ -4,6 +4,22 @@ var Hand = function() {
 
     var selectedTileId;
 
+    function removeCard(tile) {
+        delete tiles[tile.id];
+
+        $("#"+ tile.id).remove();
+    }
+
+    function addCard(tile) {
+        tiles[tile.id]=(tile);
+
+        var tileTag = tile.drawCard();
+
+        $("#tiles").append(tileTag);
+        tileTag.onmouseenter=Hand.enterTile;
+        tileTag.onmouseleave=Hand.leaveTile;
+    }
+
 	return {
 		enterTile: function () {
 			$(this).stop().animate({
@@ -27,25 +43,8 @@ var Hand = function() {
             ev.dataTransfer.setData("Id", ev.target.id);
 		},
 		
-		add: function(tile) {
-			tiles[tile.id]=(tile);
-
-            var tileTag = tile.drawCard();
-
-            $("#tiles").append(tileTag);
-            tileTag.onmouseenter=Hand.enterTile;
-            tileTag.onmouseleave=Hand.leaveTile;
-            /*
-            $(".tile").mouseenter(Hand.enterTile);
-            $(".tile").mouseleave(Hand.leaveTile);
-            */
-		},
-		
-		remove: function(tile) {
-			delete tiles[tile.id];
-			
-			$("#"+ tile.id).remove();
-		},
+		add: addCard,
+		remove: removeCard,
 		
 		getTile: function(id) {
 			return tiles[id];
@@ -61,6 +60,18 @@ var Hand = function() {
 
         show: function() {
             $("#tiles").css("display", "block");
+        },
+
+        renew: function() {
+            $.post("/game/" + $("#guid")[0].value + "/action/drawHand", function(data) {
+                for (var tile in tiles) {
+                    removeCard(tiles[tile]);
+                }
+
+                for (var tile in data.newHand) {
+                    addCard(new Tile(data.newHand[tile]));
+                }
+            });
         }
 	};
 }();
