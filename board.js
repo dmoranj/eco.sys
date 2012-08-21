@@ -19,7 +19,8 @@ function place(gameId, tile) {
                 console.log("Error placing tile: " + err);
             } else {
                 newCard = tiles.draw(savedGame, savedGame.currentPlayer);
-                game.nextPlayer(doc);
+                game.nextPlayer(savedGame);
+                game.check(savedGame);
 
                 savedGame.save(function(err, finalGame) {
                     async.map(
@@ -34,7 +35,9 @@ function place(gameId, tile) {
                             clientManager.broadcast(finalGame.guid, "updateGame", {
                                 currentPlayer:finalGame.currentPlayer,
                                 scores:results,
-                                drawnCard: newCard
+                                drawnCard: newCard,
+                                state: finalGame.state,
+                                winner: finalGame.winner
                             });
                         }
                     );

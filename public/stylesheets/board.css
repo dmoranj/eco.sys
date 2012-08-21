@@ -111,3 +111,26 @@
     top: 100px;
     left: 25%;
 }
+
+#finishedDialog {
+    display: none;
+    width: 20%;
+    height: 10%;
+    position: fixed;
+    left: 40%;
+    top: 45%;
+    background-color: #add8e6;
+    padding: 20px;
+    border-color: black;
+    border-style: solid;
+}
+
+#finishText {
+    text-align: center;
+    font-size: 15pt;
+}
+
+#winnerText {
+    text-align: center;
+    font-size: 40pt;
+}

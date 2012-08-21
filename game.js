@@ -1,3 +1,6 @@
+var
+    maxScore=25;
+
 
 function next(game) {
     for (var i=0; i < game.players.length; i++) {
@@ -15,5 +18,15 @@ function scoreTile(game, tile) {
     }
 }
 
-exports.nextPlayer = next
-exports.score = scoreTile
+function checkState(game, newStatus) {
+    for (var i=0; i < game.players.length; i++) {
+        if (game.players[i].score > maxScore) {
+            game.state = "FINISHED";
+            game.winner = game.players[i].name;
+        }
+    }
+}
+
+exports.nextPlayer = next;
+exports.score = scoreTile;
+exports.check = checkState;

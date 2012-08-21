@@ -265,7 +265,7 @@ var GameBoard = function() {
                 for (var i in data.placedTiles)
                     add(new Tile(data.placedTiles[i]));
 
-                if (data.currentPlayer == $("#player")[0].value) {
+                if (data.state!= "FINISHED" && data.currentPlayer == $("#player")[0].value) {
                     Hand.show();
                 } else {
                     Hand.hide();

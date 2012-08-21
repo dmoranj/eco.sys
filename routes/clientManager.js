@@ -63,6 +63,8 @@ function manageConnection (socket) {
 
             result.placedTiles = doc.placedTiles;
             result.currentPlayer = doc.currentPlayer;
+            result.state = doc.state;
+            result.winner = doc.winner;
 
             socket.emit('initialConfiguration', result);
         });

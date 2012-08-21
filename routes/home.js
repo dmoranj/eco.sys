@@ -25,6 +25,7 @@ function createGameEntity(title, players) {
     gameToCreate.deck = tiles.generateDeck();
     gameToCreate.placedTiles = [];
     gameToCreate.currentPlayer = players[0].trim();
+    gameToCreate.state = "PLAYING";
 
     for (i in players) {
         gameToCreate.players.push({

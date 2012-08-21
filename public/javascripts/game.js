@@ -37,19 +37,25 @@ var Game = function() {
     return {
         init: function() {
             Server.addListener('updateGame', function (data) {
-                if (data.currentPlayer == $("#player")[0].value) {
-                    Hand.show();
-                }
+                if (data.state=="FINISHED") {
+                    $("#finishedDialog").css("display", "block");
+                    $("#winnerText").text(data.winner);
+                    Hand.hide();
+                } else {
+                    if (data.currentPlayer == $("#player")[0].value) {
+                        Hand.show();
+                    }
 
-                if (data.drawnCard && data.drawnCard.owner == $("#player")[0].value) {
-                    Hand.add(new Tile(data.drawnCard));
-                }
+                    if (data.drawnCard && data.drawnCard.owner == $("#player")[0].value) {
+                        Hand.add(new Tile(data.drawnCard));
+                    }
 
-                for (var i=0; i < data.scores.length; i++) {
-                    if (data.scores[i].name==$("#player")[0].value) {
-                        $("#score").text(data.scores[i].score);
-                    } else {
-                        $("#" + data.scores[i].name + " > .score").text(data.scores[i].score);
+                    for (var i=0; i < data.scores.length; i++) {
+                        if (data.scores[i].name==$("#player")[0].value) {
+                            $("#score").text(data.scores[i].score);
+                        } else {
+                            $("#" + data.scores[i].name + " > .score").text(data.scores[i].score);
+                        }
                     }
                 }
             });
@@ -61,8 +67,13 @@ var Game = function() {
 
                 assignedColors[$("#player")[0].value] = colors[0];
                 $("#score").css("background-color", colors[0]);
-
                 $("#score").text(data.player.score);
+
+                if (data.state=="FINISHED") {
+                    $("#finishedDialog").css("display", "block");
+                    $("#winnerText").text(data.winner);
+                    Hand.hide();
+                }
             });
         },
 

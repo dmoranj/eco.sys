@@ -54,6 +54,8 @@ var Game = new Schema({
     , deck         : [Card]
     , placedTiles  : [Card]
     , currentPlayer : String
+    , state        : String
+    , winner        : String
 });
 
 mongoose.model('User', User);
