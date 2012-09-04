@@ -60,8 +60,8 @@ app.post('/login', login.authenticate);
 app.get('/logout', login.logout);
 
 // User management
-app.get('/users/register', users.registerForm);
-app.post('/users/register', users.register);
+app.get('/users/:invitationId/register', users.registerForm);
+app.post('/users/:invitationId/register', users.register);
 
 // Gameplay
 app.get('/game/:id', requiresLogin, gameMod.game);

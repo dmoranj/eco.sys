@@ -48,9 +48,19 @@ function createInvitation(email) {
     });
 }
 
-function getInvitation(guid, callback) {
-    Invitation.findOne({guid: guid}, callback);
+function checkInvitation(guid, email) {
+    return function(callback) {
+        Invitation.findOne({guid: guid, email: email}, function (err, invitation) {
+            if (err) {
+                callback(err);
+            } else if (invitation==null) {
+                callback("Invitation or email not found")
+            } else {
+                callback(null, invitation);
+            }
+        });
+    }
 }
 
 exports.send = createInvitation;
-exports.get = getInvitation;
+exports.check = checkInvitation;
