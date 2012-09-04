@@ -9,7 +9,21 @@
 <body>
 <div id="main">
     <div id="title">eco.SYS</div>
+
+    <% if (typeof errorMessage != 'undefined') { %>
+    <div class="error">
+        <%= errorMessage %>
+    </div>
+    <% } %>
+
     <div id="registerData">
+
+        <script type="text/javascript">
+            var RecaptchaOptions = {
+                theme : 'blackglass'
+            };
+        </script>
+
         <form action="/users/register" method="POST">
             <div class="formField">
                 eMail: <input type="text" length="140" name="email">
@@ -26,8 +40,13 @@
             <div class="formField">
                 Surname: <input type="text" length="140" name="surname">
             </div>
+            <div class="captcha">
+                <%- captcha %>
+            </div>
             <div class="buttons">
-                <input type="submit" value="Create user">
+                <div class="button">
+                    <input type="submit" value="Create user">
+                </div>
             </div>
         </form>
     </div>

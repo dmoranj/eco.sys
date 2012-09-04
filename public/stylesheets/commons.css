@@ -21,7 +21,6 @@ html {
     top: 10px;
     text-align: center;
     font-size: 50pt;
-
 }
 
 .formField {
@@ -33,5 +32,10 @@ html {
 }
 
 .buttons {
+    width: 100%;
+    padding: 10px;
+}
+
+.button {
     float: right;
 }

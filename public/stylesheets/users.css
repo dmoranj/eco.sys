@@ -12,11 +12,29 @@
 #registerData {
     position: absolute;
     width: 40%;
-    height: 30%;
+    height: 65%;
     left: 30%;
-    top: 40%;
+    top: 20%;
     padding: 10px;
     border-style: solid;
     background-color: #d3d3d3;
 }
 
+.error {
+    position: absolute;
+    width: 60%;
+    height: 2%;
+    left: 20%;
+    top: 11%;
+    text-align: center;
+    padding: 10px;
+    border-style: solid;
+    border-color: red;
+    background-color: #FFBBBB;
+}
+
+.captcha {
+    margin-top: 30px;
+    margin-left: 5%;
+    margin-bototm: 20px;
+}

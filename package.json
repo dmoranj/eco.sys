@@ -12,6 +12,7 @@
     "async": "*",
     "socket.io": "*",
     "nodemailer": "0.3.22",
-    "node-uuid": "*"
+    "node-uuid": "*",
+    "recaptcha": "~1.2.0"
   }
 }
