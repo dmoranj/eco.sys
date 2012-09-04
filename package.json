@@ -10,6 +10,8 @@
     "ejs": "*",
     "mongoose" : "*",
     "async": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "nodemailer": "0.3.22",
+    "node-uuid": "*"
   }
 }

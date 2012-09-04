@@ -58,10 +58,18 @@ var Game = new Schema({
     , winner        : String
 });
 
+var Invitation = new Schema({
+    _id             : ObjectId,
+    email           : String,
+    guid            : String,
+    availability    : Date
+});
+
 mongoose.model('User', User);
 mongoose.model('Player', Player);
 mongoose.model('Game', Game);
 mongoose.model('Card', User);
 mongoose.model('Tile', User);
+mongoose.model('Invitation', Invitation);
 
 exports.mongoose = mongoose;
