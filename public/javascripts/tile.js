@@ -13,7 +13,7 @@ var Tile = function(data) {
 
 	var marginConsumes = [2, 8];
 	var marginProduces = [2, 2];
-	var resourceDimensions = [15, 15];
+	var resourceDimensions = [10, 10];
 	
 	var resourceColor = {1: "#FF0000",
 						 2: "#00FF00",
