@@ -70,6 +70,11 @@ function manageConnection (socket) {
         });
     }
 
+    function sendChat(data) {
+        broadcastMessage(data.gameId, "chat", data);
+    }
+
+    socket.on('chat', sendChat);
     socket.on('init', initBoard);
     socket.on('place', placeTile);
     socket.on('disconnect', disconnectClient);

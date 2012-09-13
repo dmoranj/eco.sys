@@ -58,7 +58,7 @@
 	position: absolute;
 	width: 400px;
 	height: 110px;
-	right: 10px;
+	right: 50px;
 	bottom: 10px;
     z-index: 40;
 }
@@ -66,13 +66,51 @@
 #score {
 	position: absolute;
 	width: 100px;
-	left: 10px;
-	bottom: 10px;
+	right: -80px;
+    height: 80px;
+    bottom: 10px;
     padding: 10px;
     font-size: 50pt;
     text-align: center;
     vertical-align: middle;
     border-style: solid;
+}
+
+#chat {
+    position: absolute;
+    width: 280px;
+    height: 90px;
+    left: -50px;
+    bottom: 10px;
+    vertical-align: middle;
+    border-style: solid;
+    padding: 5px;
+    background-color: #303030;
+    font-size: 8pt;
+    z-index: 60;
+}
+
+#chat > input {
+    position: absolute;
+    width: 280px;
+    border-style: none;
+    background-color: #444444;
+    color: white;
+    bottom: 0px;
+    left: 5px;
+}
+
+#history {
+    width: 280px;
+    height: 84%;
+    overflow: hidden;
+    overflow-y: scroll;
+    text-align: left;
+    color: #F5F5FF;
+}
+
+.chatPlayer {
+    font-weight: bolder;
 }
 
 .tile {
