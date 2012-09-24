@@ -1,12 +1,13 @@
 var Server = function() {
     var socket;
+    var server;
 
     function sendMessage(type, data) {
         socket.emit(type, data);
     }
 
     function initServer () {
-        socket = io.connect('http://localhost');
+        socket = io.connect(server);
     }
 
     function listen(event, callback) {
@@ -16,6 +17,9 @@ var Server = function() {
     return {
         init: initServer,
         addListener: listen,
-        send: sendMessage
+        send: sendMessage,
+        setServer: function(server) {
+            this.server = server;
+        }
     }
 }();

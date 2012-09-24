@@ -4,7 +4,8 @@ var tiles = require("../tiles");
 function showGame(req, res) {
     res.render('game', {
         guid: req.params.id,
-        player: req.session.user
+        player: req.session.user,
+        serverUrl: process.env.GAMES_SERVER_URL
     });
 };
 
@@ -14,6 +15,7 @@ function drawHand(req, res) {
     var gameId = req.params.id;
 
     Game.findOne({guid: gameId} , function(err, game) {
+
         if (err) {
             res.json({
                 status: "ERROR",
