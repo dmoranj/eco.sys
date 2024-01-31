@@ -11,7 +11,7 @@
     "mongoose" : "*",
     "async": "*",
     "socket.io": "*",
-    "nodemailer": "0.3.22",
+    "nodemailer": "6.9.8",
     "node-uuid": "*",
     "recaptcha": "~1.2.0"
   }
